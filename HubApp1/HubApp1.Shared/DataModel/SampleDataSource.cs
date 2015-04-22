@@ -42,9 +42,9 @@ namespace HubApp1.Data
         [DataMember]
         public string Title { get; private set; }
         [DataMember]
-        public string Subtitle { get; private set; }
+        public string Subtitle { get;  set; }
         [DataMember]
-        public string Description { get; private set; }
+        public string Description { get;  set; }
         [DataMember]
         public string ImagePath { get; private set; }
         [DataMember]
@@ -99,7 +99,7 @@ namespace HubApp1.Data
     [DataContract]
     public sealed class SampleDataSource
     {
-        private static SampleDataSource _sampleDataSource = new SampleDataSource();
+        public static SampleDataSource _sampleDataSource = new SampleDataSource();
 
         private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
         [DataMember]
@@ -166,7 +166,7 @@ namespace HubApp1.Data
             //}
             //this.ser
         }
-        private async Task JSONSerialize(SampleDataSource objStudent)
+        public async Task JSONSerialize(SampleDataSource objStudent)
 
         {
             MemoryStream stream = new MemoryStream();
@@ -180,6 +180,11 @@ namespace HubApp1.Data
             await Windows.Storage.FileIO.WriteTextAsync(theNextFile, jsonText);
             //theNextFile.
         }
+
+        //public async Task SaveitWhateverQuick()
+        //{
+        //    //this.
+        //}
 
         private static async Task<SampleDataGroup> getRomingGromeup()
         {

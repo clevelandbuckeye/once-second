@@ -79,19 +79,35 @@ namespace HubApp1
             var group = section.DataContext;
             this.Frame.Navigate(typeof(SectionPage), ((SampleDataGroup)group).UniqueId);
         }
-
+        bool isChnageSubtit = false;
         /// <summary>
         /// Invoked when an item within a section is clicked.
         /// </summary>
         /// <param name="sender">The GridView or ListView
         /// displaying the item clicked.</param>
         /// <param name="e">Event data that describes the item clicked.</param>
-        void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        async void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
             var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            this.Frame.Navigate(typeof(ItemPage), itemId);
+            if (isChnageSubtit)
+            {
+
+                var werwe = e.ClickedItem as SampleDataItem;
+                if (werwe != null)
+                {
+                    werwe.Subtitle = "23f23f32f23f";
+
+                    werwe.Description = "234wfewfewefew";
+                }
+            }
+            else
+            {
+                await SampleDataSource._sampleDataSource.JSONSerialize(SampleDataSource._sampleDataSource);
+                this.Frame.Navigate(typeof(ItemPage), itemId);
+            }
+
         }
         #region NavigationHelper registration
 
@@ -115,5 +131,15 @@ namespace HubApp1
         }
 
         #endregion
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            isChnageSubtit = true;
+        }
+
+        private void CheckBox_UnChecked(object sender, RoutedEventArgs e)
+        {
+            isChnageSubtit = false;
+        }
     }
 }
