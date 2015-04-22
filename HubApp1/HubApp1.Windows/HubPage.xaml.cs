@@ -64,7 +64,7 @@ namespace HubApp1
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-4");
+            var sampleDataGroup = await SampleDataSource.GetGroupAsync("1");
             this.DefaultViewModel["Section3Items"] = sampleDataGroup;
         }
 

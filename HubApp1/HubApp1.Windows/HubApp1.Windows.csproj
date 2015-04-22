@@ -132,11 +132,57 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1.PNG" />
+    <Content Include="Assets\011.jpg" />
+    <Content Include="Assets\015.jpg" />
+    <Content Include="Assets\10 %282%29.JPG" />
+    <Content Include="Assets\13 %282%29.JPG" />
+    <Content Include="Assets\15 %282%29.JPG" />
+    <Content Include="Assets\16x10.jpg" />
+    <Content Include="Assets\17 %282%29.JPG" />
+    <Content Include="Assets\20.jpg" />
+    <Content Include="Assets\3D_Fantasy_Places_HD_-0008.jpg" />
+    <Content Include="Assets\3D_Fantasy_Places_HD_-0022.jpg" />
+    <Content Include="Assets\3D_Fantasy_Places_HD_-0023.jpg" />
+    <Content Include="Assets\3D_Fantasy_Places_HD_-0027.jpg" />
+    <Content Include="Assets\3D_Fantasy_Places_HD_0036.jpg" />
+    <Content Include="Assets\4 %284%29.jpg" />
+    <Content Include="Assets\4-1920.jpg" />
+    <Content Include="Assets\5 %282%29.JPG" />
+    <Content Include="Assets\Animals %281%29.jpg" />
+    <Content Include="Assets\Animals %2814%29.jpg" />
+    <Content Include="Assets\Animals %282%29.jpg" />
+    <Content Include="Assets\Animals %283%29.jpg" />
+    <Content Include="Assets\Animals %284%29.jpg" />
+    <Content Include="Assets\Animals %287%29.jpg" />
+    <Content Include="Assets\Animals %288%29.jpg" />
+    <Content Include="Assets\Animals %289%29.jpg" />
+    <Content Include="Assets\Cities  %2841%29.jpg" />
+    <Content Include="Assets\Cities  %2856%29.jpg" />
+    <Content Include="Assets\Cities  %2858%29.jpg" />
+    <Content Include="Assets\Cities  %2859%29.jpg" />
+    <Content Include="Assets\Cities  %2863%29.jpg" />
+    <Content Include="Assets\Cities  %2869%29.jpg" />
+    <Content Include="Assets\eiffel.PNG" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\screenshot_02052014_205321.png" />
+    <Content Include="Assets\screenshot_02052014_205323.png" />
+    <Content Include="Assets\screenshot_02052014_205422.png" />
+    <Content Include="Assets\screenshot_02052014_205703.png" />
+    <Content Include="Assets\screenshot_02082014_161043.png" />
+    <Content Include="Assets\screenshot_02082014_161205.png" />
+    <Content Include="Assets\screenshot_02082014_161312.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\sunstar-1920x1080.jpg" />
+    <Content Include="Assets\Thailand Beach - 2880x1800.jpg" />
+    <Content Include="Assets\The twigs - 1920x1080.png" />
+    <Content Include="Assets\tunnel_-1920x1200.jpg" />
+    <Content Include="Assets\UNITY 2014 %281%29.jpg" />
+    <Content Include="Assets\waves_mac_fullhd.jpg" />
     <Content Include="Assets\WideLogo.scale-100.png" />
+    <Content Include="Assets\Winter %283%29.jpg" />
+    <Content Include="Assets\Winter pack %281%29.jpg" />
     <Content Include="unsavedchanges.PNG" />
   </ItemGroup>
   <ItemGroup>

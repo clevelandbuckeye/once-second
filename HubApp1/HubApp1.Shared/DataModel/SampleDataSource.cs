@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage;
@@ -21,6 +24,7 @@ namespace HubApp1.Data
     /// <summary>
     /// Generic item data model.
     /// </summary>
+    [DataContract]
     public class SampleDataItem
     {
         public SampleDataItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content)
@@ -33,11 +37,17 @@ namespace HubApp1.Data
             this.Content = content;
         }
 
+        [DataMember]
         public string UniqueId { get; private set; }
+        [DataMember]
         public string Title { get; private set; }
+        [DataMember]
         public string Subtitle { get; private set; }
+        [DataMember]
         public string Description { get; private set; }
+        [DataMember]
         public string ImagePath { get; private set; }
+        [DataMember]
         public string Content { get; private set; }
 
         public override string ToString()
@@ -49,6 +59,7 @@ namespace HubApp1.Data
     /// <summary>
     /// Generic group data model.
     /// </summary>
+    [DataContract]
     public class SampleDataGroup
     {
         public SampleDataGroup(String uniqueId, String title, String subtitle, String imagePath, String description)
@@ -60,12 +71,17 @@ namespace HubApp1.Data
             this.ImagePath = imagePath;
             this.Items = new ObservableCollection<SampleDataItem>();
         }
-
+        [DataMember]
         public string UniqueId { get; private set; }
+        [DataMember]
         public string Title { get; private set; }
+        [DataMember]
         public string Subtitle { get; private set; }
+        [DataMember]
         public string Description { get; private set; }
+        [DataMember]
         public string ImagePath { get; private set; }
+        [DataMember]
         public ObservableCollection<SampleDataItem> Items { get; private set; }
 
         public override string ToString()
@@ -80,11 +96,13 @@ namespace HubApp1.Data
     /// SampleDataSource initializes with data read from a static json file included in the 
     /// project.  This provides sample data at both design-time and run-time.
     /// </summary>
+    [DataContract]
     public sealed class SampleDataSource
     {
         private static SampleDataSource _sampleDataSource = new SampleDataSource();
 
         private ObservableCollection<SampleDataGroup> _groups = new ObservableCollection<SampleDataGroup>();
+        [DataMember]
         public ObservableCollection<SampleDataGroup> Groups
         {
             get { return this._groups; }
@@ -120,9 +138,103 @@ namespace HubApp1.Data
             if (this._groups.Count != 0)
                 return;
 
-            Uri dataUri = new Uri("ms-appx:///DataModel/SampleData.json");
+            await GetImagesFromFolder();
 
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
+            //await SampleJasonGet();
+        }
+
+        public async Task GetImagesFromFolder()
+        {
+            //SampleDataGroup group = await getGroupFromPicturesLibrary();
+
+            //SampleDataGroup group = await getRomingGromeup();
+            await SampleJasonGet();
+
+            //this.Groups.Add(group);
+            //await JSONSerialize(this);
+        }
+        public async Task SaveGroups()
+        {
+            //using (FileStream fs = File.Open(@"c:\person.json", FileMode.CreateNew))
+            //using (StreamWriter sw = new StreamWriter(fs))
+            //using (JsonWriter jw = new JsonTextWriter(sw))
+            //{
+            //    jw.Formatting = Formatting.Indented;
+
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    serializer.Serialize(jw, person);
+            //}
+            //this.ser
+        }
+        private async Task JSONSerialize(SampleDataSource objStudent)
+
+        {
+            MemoryStream stream = new MemoryStream();
+            DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(SampleDataSource));
+            jsonSer.WriteObject(stream, objStudent);
+            stream.Position = 0;
+            StreamReader sr = new StreamReader(stream);
+            //StorageFile.CreateStreamedFileAsync("databaseaa.json", )
+            string jsonText = sr.ReadToEnd();
+            var theNextFile = await ApplicationData.Current.RoamingFolder.CreateFileAsync("database11.json", CreationCollisionOption.ReplaceExisting);
+            await Windows.Storage.FileIO.WriteTextAsync(theNextFile, jsonText);
+            //theNextFile.
+        }
+
+        private static async Task<SampleDataGroup> getRomingGromeup()
+        {
+            var picfold = ApplicationData.Current.RoamingFolder;
+            SampleDataGroup group = new SampleDataGroup("1", "unchart", "undescript", "1.png", "the unfiltered list or starting list");
+            foreach (StorageFile picfil in await picfold.GetFilesAsync())
+            {
+                //var newfi = await picfil.CopyAsync(ApplicationData.Current.RoamingFolder);
+                SampleDataItem rer = new SampleDataItem(picfil.Name,
+                                                        picfil.ContentType,
+                                                        picfil.DateCreated.ToString(),
+                                                        picfil.Path,
+                                                        picfil.FileType,
+                                                        picfil.FolderRelativeId);
+
+
+                group.Items.Add(rer);
+            }
+
+            return group;
+        }
+
+        private static async Task<SampleDataGroup> getGroupFromPicturesLibrary()
+        {
+            var picfold = KnownFolders.PicturesLibrary;
+            SampleDataGroup group = new SampleDataGroup("1", "unchart", "undescript", "1.png", "the unfiltered list or starting list");
+            foreach (StorageFile picfil in await picfold.GetFilesAsync())
+            {
+                var newfi = await picfil.CopyAsync(ApplicationData.Current.RoamingFolder);
+                SampleDataItem rer = new SampleDataItem(newfi.Name,
+                                                        newfi.ContentType,
+                                                        newfi.DateCreated.ToString(),
+                                                        newfi.Path,
+                                                        newfi.FileType,
+                                                        newfi.FolderRelativeId);
+
+                group.Items.Add(rer);
+            }
+
+            return group;
+        }
+        public async Task<Uri> getStorageUri()
+        {
+            var wereer = await ApplicationData.Current.RoamingFolder.GetFileAsync("database11.json");
+            return new Uri(wereer.Path);  //uri generation C# next 6.0
+        }
+        private async Task SampleJasonGet()
+        {
+            //Uri dataUri = await getStorageUri();// new Uri("ms-appx:///DataModel/SampleData.json");
+
+            //var sdfefe = ApplicationData.Current.RoamingFolder.GetFileAsync("database11.json")
+
+            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
+            var file = await ApplicationData.Current.RoamingFolder.GetFileAsync("database11.json");
+
             string jsonText = await FileIO.ReadTextAsync(file);
             JsonObject jsonObject = JsonObject.Parse(jsonText);
             JsonArray jsonArray = jsonObject["Groups"].GetArray();
